@@ -50,6 +50,10 @@ contains
     itri = 1
     err = 0
     evec = 0D0
+! Directive inserted by Cray Reveal.  May be incomplete.
+!$OMP  parallel do default(none)                                         &
+!$OMP&   private (bc_coords,dx,icomp,inode,iv)                           &
+!$OMP&   shared  (y,evec,grid_efield,grid_mapping,itri)
     do iv = 1,veclen
 
        dx(1) = y(iv,1) - grid_mapping(1,3,itri)
