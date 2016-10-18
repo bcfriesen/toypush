@@ -60,7 +60,11 @@ program toypush
   !pid = 88
   !open(unit=15,file='orbit.dat',action='write')
 
+#ifdef OPENMP
+  t1 = omp_get_wtime()
+#else
   call cpu_time(t1)
+#endif
 
   !$omp parallel do private(iblock, it)
   do iblock = 1,nblock
@@ -86,7 +90,11 @@ program toypush
   end do
   !close(15)
 
+#ifdef OPENMP
+  t2 = omp_get_wtime()
+#else
   call cpu_time(t2)
+#endif
 
   if(my_id .eq. 0) write(*,*) 'done pushing'
   if(my_id .eq. 0) write(*,*) 'spent ',t2-t1,'s'
